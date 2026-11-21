@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3D068" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#AA8214" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141B2D" />
+      <stop offset="100%" stop-color="#090D16" />
+    </linearGradient>
+  </defs>
+  <!-- Escudo externo -->
+  <path d="M60 6 L108 26 L108 68 C108 96 60 114 60 114 C60 114 12 96 12 68 L12 26 Z" fill="url(#shieldGrad)" stroke="url(#goldGrad)" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Borda interna fina -->
+  <path d="M60 16 L98 32 L98 66 C98 88 60 103 60 103 C60 103 22 88 22 66 L22 32 Z" fill="none" stroke="url(#goldGrad)" stroke-width="1.2" opacity="0.45" stroke-linejoin="round"/>
+  <!-- Estrelas ou detalhe superior -->
+  <circle cx="60" cy="25" r="2.5" fill="#F3D068"/>
+  <circle cx="50" cy="27" r="1.8" fill="#D4AF37" opacity="0.8"/>
+  <circle cx="70" cy="27" r="1.8" fill="#D4AF37" opacity="0.8"/>
+  <!-- Monograma IC -->
+  <text x="60" y="76" font-family="'Barlow Condensed', 'Montserrat', Arial Black, sans-serif" font-size="44" font-weight="900" text-anchor="middle" fill="url(#goldGrad)" letter-spacing="1">IC</text>
+  <!-- Faixa SPORTS sutil -->
+  <text x="60" y="93" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="800" text-anchor="middle" fill="#94A3B8" letter-spacing="3">SPORTS</text>
+</svg>

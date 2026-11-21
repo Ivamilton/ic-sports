@@ -1,0 +1,7 @@
+id,nome,time,liga,categoria,temporada,preco,preco_promocional,tamanhos_disponiveis,quantidade_em_estoque_por_tamanho,imagens,destaque,ativo
+1,Camisa Real Madrid Home 24/25,Real Madrid,La Liga,jogador,2024/25,329.90,289.90,"P,M,G,GG,XG","P:2,M:4,G:3,GG:1,XG:0",/placeholders/real-madrid-1.svg,sim,sim
+2,Camisa Flamengo I 2024,Flamengo,Brasileirão,torcedor,2024,219.90,189.90,"P,M,G,GG,XG","P:5,M:6,G:4,GG:2,XG:1",/placeholders/flamengo-1.svg,sim,sim
+3,Camisa Manchester City Away 24/25,Manchester City,Premier League,jogador,2024/25,349.90,299.90,"P,M,G,GG,XG","P:1,M:3,G:2,GG:0,XG:0",/placeholders/mancity-1.svg,sim,sim
+4,Camisa Seleção Brasileira Home 2024,Brasil,Seleções Mundiais,torcedor,2024,249.90,199.90,"P,M,G,GG,XG","P:4,M:8,G:5,GG:3,XG:2",/placeholders/brasil-1.svg,sim,sim
+5,Camisa Palmeiras I 2024,Palmeiras,Brasileirão,jogador,2024,319.90,279.90,"P,M,G,GG,XG","P:2,M:3,G:1,GG:1,XG:0",/placeholders/palmeiras-1.svg,sim,sim
+6,Camisa Barcelona Retrô 1999 Centenário,Barcelona,La Liga,retro,1999/00,259.90,229.90,"P,M,G,GG,XG","P:1,M:2,G:2,GG:1,XG:0",/placeholders/barcelona-1.svg,sim,sim

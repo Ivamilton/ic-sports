@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" fill="#F8F9FA"/>
+  <rect x="20" y="20" width="760" height="760" rx="24" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  <circle cx="400" cy="400" r="280" fill="#E0F2FE"/>
+  <path d="M280 230 L340 180 C380 205 420 205 460 180 L520 230 L590 270 L540 360 L490 330 L490 620 L310 620 L310 330 L260 360 L210 270 Z" fill="#0C4A6E" stroke="#0284C7" stroke-width="5" stroke-linejoin="round"/>
+  <rect x="340" y="220" width="25" height="400" fill="#FACC15"/>
+  <rect x="435" y="220" width="25" height="400" fill="#FACC15"/>
+  <!-- Haaland 9 -->
+  <text x="400" y="310" font-family="'Inter', sans-serif" font-size="28" font-weight="900" text-anchor="middle" fill="#FFFFFF" letter-spacing="4">HAALAND</text>
+  <text x="400" y="450" font-family="'Anton', sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#FFFFFF">9</text>
+  <text x="400" y="680" font-family="'Inter', sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#94A3B8">IC SPORTS · VISTA TRASEIRA</text>
+</svg>
