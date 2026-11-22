@@ -18,9 +18,11 @@ export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
   const buscaParam = searchParams.get("busca") || "";
   const categoriaParam = searchParams.get("categoria") || "todas";
   const ligaParam = searchParams.get("liga") || "todas";
+  const origemParam = searchParams.get("origem") || "todos";
 
   const [busca, setBusca] = useState(buscaParam);
   const [modalFiltrosAberto, setModalFiltrosAberto] = useState(false);
+  const [limiteExibicao, setLimiteExibicao] = useState(24);
 
   const [filtros, setFiltros] = useState<EstadoFiltros>({
     time: "todos",
@@ -66,6 +68,14 @@ export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
   // Filtragem
   const produtosFiltrados = useMemo(() => {
     let lista = [...produtosIniciais];
+
+    if (origemParam === "clubes") {
+      lista = lista.filter((p) => p.tipoOrigem !== "selecao");
+    } else if (origemParam === "nacionais") {
+      lista = lista.filter((p) => p.tipoOrigem === "nacional");
+    } else if (origemParam === "internacionais") {
+      lista = lista.filter((p) => p.tipoOrigem === "internacional");
+    }
 
     // Busca por texto
     if (busca.trim()) {
@@ -122,20 +132,29 @@ export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
     }
 
     return lista;
-  }, [produtosIniciais, busca, filtros]);
+  }, [produtosIniciais, busca, filtros, origemParam]);
+
+  const tituloCatalogo =
+    origemParam === "clubes"
+      ? "Todos os Clubes"
+      : origemParam === "nacionais"
+        ? "Clubes Nacionais"
+        : origemParam === "internacionais"
+          ? "Clubes Internacionais"
+          : "Catálogo Completo";
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8">
       {/* Cabeçalho do Catálogo */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#E5E5E5]">
         <div>
-          <span className="text-xs font-black uppercase tracking-widest text-[#D10000]">
+          <span className="text-xs font-black uppercase tracking-widest text-[#737373]">
             Mantos Oficiais & Retrô
           </span>
           <h1 className="font-athletic text-4xl sm:text-6xl font-black uppercase tracking-wide text-[#0A0A0A]">
-            Catálogo Completo
+            {tituloCatalogo}
           </h1>
-          <p className="text-xs sm:text-sm text-[#666666] mt-1">
+          <p className="text-xs sm:text-sm text-[#737373] mt-1">
             Exibindo <strong>{produtosFiltrados.length}</strong> camisas encontradas
           </p>
         </div>
@@ -148,7 +167,7 @@ export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
               placeholder="Buscar no catálogo…"
               value={busca}
               onChange={(e) => setBusca(e.target.value)}
-              className="w-full sm:w-60 pl-9 pr-3 py-2 text-xs font-semibold bg-white border border-[#E5E5E5] rounded-xl focus:outline-none focus:border-[#D10000] focus:ring-2 focus:ring-[#D10000]/20"
+              className="w-full sm:w-60 pl-9 pr-3 py-2 text-xs font-semibold bg-white border border-[#E5E5E5] rounded-xl focus:outline-none focus:border-[#0A0A0A] focus:ring-2 focus:ring-black/10"
             />
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#888888] pointer-events-none" aria-hidden="true" />
           </div>
@@ -162,7 +181,7 @@ export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
           <button
             type="button"
             onClick={() => setModalFiltrosAberto(true)}
-            className="lg:hidden flex items-center justify-center gap-2 py-2 px-4 bg-[#0A0A0A] text-white rounded-xl text-xs font-bold uppercase tracking-wider"
+            className="lg:hidden flex items-center justify-center gap-2 py-2 px-4 bg-[#0A0A0A] hover:bg-[#262626] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
           >
             <SlidersHorizontal size={15} aria-hidden="true" />
             <span>Filtros</span>
@@ -196,17 +215,34 @@ export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
               <button
                 type="button"
                 onClick={handleLimpar}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#D10000] text-white font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0A0A0A] hover:bg-[#262626] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
               >
                 <RotateCcw size={14} aria-hidden="true" />
                 <span>Limpar todos os filtros</span>
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-              {produtosFiltrados.map((prod, idx) => (
-                <CardProduto key={prod.id} produto={prod} prioridade={idx < 6} />
-              ))}
+            <div className="space-y-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                {produtosFiltrados.slice(0, limiteExibicao).map((prod, idx) => (
+                  <CardProduto key={prod.id} produto={prod} prioridade={idx < 6} />
+                ))}
+              </div>
+
+              {produtosFiltrados.length > limiteExibicao && (
+                <div className="flex flex-col items-center justify-center pt-4 pb-8 gap-3">
+                  <p className="text-xs text-[#737373]">
+                    Exibindo {Math.min(limiteExibicao, produtosFiltrados.length)} de {produtosFiltrados.length} camisas
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setLimiteExibicao((prev) => prev + 24)}
+                    className="px-8 py-3 bg-[#0A0A0A] hover:bg-[#262626] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg cursor-pointer"
+                  >
+                    Carregar Mais Camisas
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>

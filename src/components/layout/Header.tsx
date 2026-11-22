@@ -3,16 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { Menu, Search, MessageCircle, Flame, ShieldAlert } from "lucide-react";
+import { Menu, Search, MessageCircle, Zap, ShoppingBag } from "lucide-react";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { gerarLinkWhatsAppGeral } from "@/lib/whatsapp";
-import { lojaConfig } from "@/config/loja";
+import { useCart } from "@/context/CartContext";
 
 export function Header() {
   const [drawerAberto, setDrawerAberto] = useState(false);
   const [termoBusca, setTermoBusca] = useState("");
   const router = useRouter();
+  const { totalItens, abrirCarrinho } = useCart();
 
   const handleBusca = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,97 +33,123 @@ export function Header() {
               type="button"
               onClick={() => setDrawerAberto(true)}
               aria-label="Abrir menu de navegação"
-              className="lg:hidden p-2 -ml-2 text-[#0A0A0A] hover:bg-[#F4F4F4] rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D10000]"
+              className="lg:hidden p-2 -ml-2 text-[#0A0A0A] hover:bg-[#F5F5F5] rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black cursor-pointer"
             >
               <Menu size={26} aria-hidden="true" />
             </button>
 
-            {/* Logo */}
+            {/* Marca em Texto: IF LEGACY com MODA ESPORTIVA coladinho */}
             <Link
               href="/"
-              className="flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D10000] rounded-lg p-1"
-              aria-label="IC Sports - Página inicial"
+              className="flex flex-col group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-lg py-1 px-1"
+              aria-label="IF Legacy Moda Esportiva - Página inicial"
             >
-              <div className="flex flex-col">
-                <span className="font-athletic text-3xl sm:text-4xl font-black italic tracking-wider text-[#D10000] leading-none transition-transform group-hover:scale-102">
-                  IC <span className="text-[#0A0A0A]">SPORTS</span>
-                </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#666666] leading-none mt-1">
-                  Mantos & Camisas de Time
-                </span>
-              </div>
+              <span className="font-athletic text-2xl sm:text-3xl lg:text-4xl font-black italic tracking-wider text-[#0A0A0A] uppercase transition-transform group-hover:scale-102 leading-none whitespace-nowrap">
+                IF LEGACY
+              </span>
+              <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.25em] text-[#737373] group-hover:text-[#0A0A0A] transition-colors leading-none mt-[1px] whitespace-nowrap">
+                MODA ESPORTIVA
+              </span>
             </Link>
           </div>
 
           {/* Centro: Navegação Desktop */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-bold tracking-wide" aria-label="Navegação desktop">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-bold tracking-wide" aria-label="Navegação desktop">
             <Link
               href="/"
-              className="text-[#0A0A0A] hover:text-[#D10000] transition-colors py-1 border-b-2 border-transparent hover:border-[#D10000]"
+              className="text-[#0A0A0A] hover:text-[#525252] transition-colors py-1 border-b-2 border-transparent hover:border-black whitespace-nowrap"
             >
               Início
             </Link>
             <Link
               href="/camisas"
-              className="text-[#0A0A0A] hover:text-[#D10000] transition-colors py-1 border-b-2 border-transparent hover:border-[#D10000]"
+              className="text-[#0A0A0A] hover:text-[#525252] transition-colors py-1 border-b-2 border-transparent hover:border-black whitespace-nowrap"
             >
               Catálogo
             </Link>
             <Link
-              href="/time/flamengo"
-              className="text-[#0A0A0A] hover:text-[#D10000] transition-colors py-1 border-b-2 border-transparent hover:border-[#D10000]"
+              href="/camisas?origem=clubes"
+              className="text-[#0A0A0A] hover:text-[#525252] transition-colors py-1 border-b-2 border-transparent hover:border-black whitespace-nowrap"
             >
               Clubes
             </Link>
             <Link
               href="/time/brasil"
-              className="text-[#0A0A0A] hover:text-[#D10000] transition-colors py-1 border-b-2 border-transparent hover:border-[#D10000]"
+              className="text-[#0A0A0A] hover:text-[#525252] transition-colors py-1 border-b-2 border-transparent hover:border-black whitespace-nowrap"
             >
               Seleções
             </Link>
-            <Link
-              href="/pronta-entrega"
-              className="inline-flex items-center gap-1.5 text-[#D10000] hover:text-[#A00000] transition-colors py-1 font-extrabold bg-[#D10000]/10 px-2.5 rounded-full"
-            >
-              <Flame size={14} aria-hidden="true" />
-              <span>Pronta Entrega</span>
-            </Link>
           </nav>
 
-          {/* Lado Direito: Barra de Busca + CTA WhatsApp */}
-          <div className="flex items-center gap-3">
-            {/* Campo de Busca Rápida (Desktop e Tablet) */}
-            <form onSubmit={handleBusca} className="hidden sm:flex relative items-center w-48 md:w-64">
+          {/* Lado Direito: Barra de Busca + Cards Proporcionais */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Campo de Busca Rápida (Desktop) */}
+            <form onSubmit={handleBusca} className="hidden xl:flex relative items-center w-40">
               <input
                 type="text"
-                placeholder="Buscar camisa ou time…"
+                placeholder="Buscar camisa…"
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs font-medium bg-[#F4F4F4] border border-[#E5E5E5] rounded-full focus:bg-white focus:border-[#D10000] focus:ring-2 focus:ring-[#D10000]/20 focus:outline-none transition-all placeholder:text-[#888888]"
+                className="w-full pl-9 pr-3 py-2 text-xs font-medium bg-[#F5F5F5] border border-[#E5E5E5] rounded-xl focus:bg-white focus:border-black focus:ring-2 focus:ring-black/10 focus:outline-none transition-all placeholder:text-[#888888]"
               />
               <Search size={15} className="absolute left-3 text-[#666666] pointer-events-none" aria-hidden="true" />
             </form>
 
-            {/* Botão de Pedido WhatsApp */}
+            {/* Card Pronta Entrega Proporcional */}
+            <Link
+              href="/pronta-entrega"
+              className="hidden sm:inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-[#0A0A0A] hover:bg-[#262626] text-white font-black text-xs uppercase tracking-wider whitespace-nowrap transition-all shadow-xs shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+            >
+              <Zap size={15} className="text-white shrink-0" aria-hidden="true" />
+              <span className="whitespace-nowrap">Pronta Entrega</span>
+            </Link>
+
+            {/* Card Pedir no WhatsApp Proporcional */}
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-2 bg-[#D10000] hover:bg-[#B00000] text-white font-black text-xs md:text-sm uppercase tracking-wider px-4 py-2.5 rounded-xl shadow-[0_4px_12px_rgba(209,0,0,0.25)] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D10000]"
+              className="hidden sm:inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-[#0A0A0A] hover:bg-[#262626] text-white font-black text-xs uppercase tracking-wider whitespace-nowrap transition-all shadow-xs shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
             >
-              <MessageCircle size={18} aria-hidden="true" />
-              <span>Pedir no WhatsApp</span>
+              <MessageCircle size={16} className="text-[#25D366] shrink-0" aria-hidden="true" />
+              <span className="whitespace-nowrap">Pedir no WhatsApp</span>
             </a>
 
-            {/* Ícone WhatsApp Mobile */}
+            {/* Card Carrinho Proporcional */}
+            <button
+              type="button"
+              onClick={abrirCarrinho}
+              aria-label={`Ver carrinho de compras (${totalItens} ${totalItens === 1 ? "item" : "itens"})`}
+              className="relative inline-flex items-center gap-2 h-10 px-3.5 sm:px-4 rounded-xl bg-[#F5F5F5] hover:bg-[#EBEBEB] text-[#0A0A0A] font-black text-xs uppercase tracking-wider whitespace-nowrap transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+            >
+              <div className="relative">
+                <ShoppingBag size={18} aria-hidden="true" />
+                {totalItens > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-[#0A0A0A] text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center border-2 border-white animate-scale-in">
+                    {totalItens}
+                  </span>
+                )}
+              </div>
+              <span className="hidden md:inline whitespace-nowrap">Carrinho</span>
+            </button>
+
+            {/* Ícones Mobile para telas pequenas */}
+            <Link
+              href="/pronta-entrega"
+              aria-label="Ver produtos a Pronta Entrega"
+              className="sm:hidden h-10 w-10 flex items-center justify-center rounded-xl bg-[#0A0A0A] text-white shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+            >
+              <Zap size={18} className="text-white" aria-hidden="true" />
+            </Link>
+
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Falar com a IC Sports no WhatsApp"
-              className="sm:hidden p-2.5 bg-[#25D366] text-white rounded-xl shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
+              aria-label="Falar com a IF Legacy no WhatsApp"
+              className="sm:hidden h-10 w-10 flex items-center justify-center rounded-xl bg-[#0A0A0A] text-white shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
             >
-              <MessageCircle size={20} aria-hidden="true" />
+              <MessageCircle size={19} className="text-[#25D366]" aria-hidden="true" />
             </a>
           </div>
         </div>
