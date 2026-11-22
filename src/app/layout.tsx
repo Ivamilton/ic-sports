@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import { TopTicker } from "@/components/layout/TopTicker";
 import { Header } from "@/components/layout/Header";
@@ -7,6 +8,7 @@ import { FloatingWhatsapp } from "@/components/layout/FloatingWhatsapp";
 import { CartProvider } from "@/context/CartContext";
 import { CartDrawer } from "@/components/carrinho/CartDrawer";
 import { lojaConfig } from "@/config/loja";
+import { RouteProgress } from "@/components/layout/RouteProgress";
 
 export const viewport: Viewport = {
   themeColor: "#0A0A0A",
@@ -48,6 +50,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#0A0A0A] font-sans antialiased">
         <CartProvider>
+          <Suspense fallback={null}>
+            <RouteProgress />
+          </Suspense>
           {/* Faixa Superior Rolante de Benefícios */}
           <TopTicker />
 

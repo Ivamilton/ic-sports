@@ -18,6 +18,7 @@ const formatarBRL = (valor: number) =>
 export function CardProduto({ produto, prioridade = false }: CardProdutoProps) {
   const { adicionarAoCarrinho } = useCart();
   const [escolhendoTamanho, setEscolhendoTamanho] = useState(false);
+  const [imagemCarregada, setImagemCarregada] = useState(false);
 
   const isEsgotado = produto.totalEstoque <= 0;
   const precoAtual = produto.preco_promocional || produto.preco;
@@ -30,20 +31,27 @@ export function CardProduto({ produto, prioridade = false }: CardProdutoProps) {
 
   return (
     <div
-      className={`group relative bg-white rounded-2xl border border-[#E5E5E5] flex flex-col justify-between overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-black ${
+      className={`motion-enter group relative bg-white rounded-2xl border border-[#E5E5E5] flex flex-col justify-between overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-black ${
         isEsgotado ? "opacity-75" : ""
       }`}
     >
       {/* Imagem do Produto com Badges */}
       <div className="relative aspect-square w-full bg-[#F5F5F5] overflow-hidden flex items-center justify-center p-3">
         <Link href={`/produto/${produto.slug}`} className="w-full h-full relative block">
+          {!imagemCarregada && (
+            <div className="skeleton absolute inset-2 rounded-xl" aria-hidden="true" />
+          )}
           <Image
             src={imagemPrincipal}
             alt={produto.nome}
             fill
+            loading={prioridade ? "eager" : "lazy"}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={prioridade}
-            className="object-contain p-2 transition-transform duration-500 ease-out group-hover:scale-106"
+            onLoad={() => setImagemCarregada(true)}
+            className={`object-contain p-2 transition-all duration-300 ease-out group-hover:scale-[1.04] ${
+              imagemCarregada ? "opacity-100" : "opacity-0"
+            }`}
           />
         </Link>
 

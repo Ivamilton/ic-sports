@@ -9,6 +9,7 @@ import { gerarLinkWhatsAppGeral } from "@/lib/whatsapp";
 import { useCart } from "@/context/CartContext";
 import type { Produto } from "@/lib/getProducts";
 import { obterProdutosCacheados } from "@/lib/produtosClient";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function normalizarTexto(texto: string) {
   return texto
@@ -22,6 +23,7 @@ export function Header() {
   const [termoBusca, setTermoBusca] = useState("");
   const [buscaAberta, setBuscaAberta] = useState(false);
   const [produtos, setProdutos] = useState<Produto[]>([]);
+  const [buscaCarregando, setBuscaCarregando] = useState(true);
   const buscaRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const { totalItens, abrirCarrinho } = useCart();
@@ -51,7 +53,8 @@ export function Header() {
   useEffect(() => {
     obterProdutosCacheados()
       .then((dados) => setProdutos(dados))
-      .catch(() => setProdutos([]));
+      .catch(() => setProdutos([]))
+      .finally(() => setBuscaCarregando(false));
   }, []);
 
   const handleBusca = (e: React.FormEvent) => {
@@ -136,7 +139,19 @@ export function Header() {
 
               {buscaAberta && termoBusca.trim().length >= 2 && (
                 <div className="absolute top-full right-0 mt-2 w-[320px] bg-white border border-[#E5E5E5] rounded-2xl shadow-xl overflow-hidden z-50">
-                  {sugestoes.length > 0 ? (
+                  {buscaCarregando ? (
+                    <div className="p-3 space-y-2 motion-fade" aria-label="Carregando sugestões">
+                      {Array.from({ length: 3 }).map((_, index) => (
+                        <div key={index} className="flex items-center gap-3">
+                          <Skeleton className="w-12 h-12 shrink-0" />
+                          <div className="flex-1 space-y-2">
+                            <Skeleton className="h-3 w-32" />
+                            <Skeleton className="h-3 w-24" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : sugestoes.length > 0 ? (
                     sugestoes.map((produto) => (
                       <Link
                         key={produto.id}

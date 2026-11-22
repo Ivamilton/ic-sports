@@ -10,6 +10,7 @@ interface GaleriaFotosProps {
 
 export function GaleriaFotos({ imagens, nome }: GaleriaFotosProps) {
   const [imagemAtiva, setImagemAtiva] = useState(0);
+  const [imagemCarregada, setImagemCarregada] = useState(false);
 
   const fotos = imagens.length > 0 ? imagens : ["/placeholders/real-madrid-1.svg"];
 
@@ -17,13 +18,20 @@ export function GaleriaFotos({ imagens, nome }: GaleriaFotosProps) {
     <div className="flex flex-col gap-4">
       {/* Imagem Principal */}
       <div className="relative aspect-square w-full rounded-2xl bg-[#F4F4F4] border border-[#E5E5E5] overflow-hidden flex items-center justify-center p-4 shadow-xs">
+        {!imagemCarregada && (
+          <div className="skeleton absolute inset-4 rounded-xl" aria-hidden="true" />
+        )}
         <Image
           src={fotos[imagemAtiva] || fotos[0]}
           alt={`${nome} - Foto ${imagemAtiva + 1}`}
           fill
           priority
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain p-4 transition-all duration-300"
+          loading="eager"
+          onLoad={() => setImagemCarregada(true)}
+          className={`object-contain p-4 transition-all duration-300 ${
+            imagemCarregada ? "opacity-100" : "opacity-0"
+          }`}
         />
       </div>
 
@@ -34,7 +42,10 @@ export function GaleriaFotos({ imagens, nome }: GaleriaFotosProps) {
             <button
               key={idx}
               type="button"
-              onClick={() => setImagemAtiva(idx)}
+              onClick={() => {
+                setImagemCarregada(false);
+                setImagemAtiva(idx);
+              }}
               className={`relative w-20 h-20 rounded-xl bg-[#F4F4F4] border-2 overflow-hidden shrink-0 transition-all cursor-pointer ${
                 imagemAtiva === idx
                   ? "border-[#0A0A0A] ring-2 ring-black/10 shadow-xs"
