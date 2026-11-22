@@ -62,7 +62,7 @@ export function FiltrosMobileModal({
           <button
             type="button"
             onClick={onFechar}
-            className="w-full py-3.5 bg-[#D10000] text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-md cursor-pointer"
+            className="w-full py-3.5 bg-[#0A0A0A] hover:bg-[#262626] text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-md transition-colors cursor-pointer"
           >
             Ver {totalResultados} {totalResultados === 1 ? "Produto" : "Produtos"}
           </button>

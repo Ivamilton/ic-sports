@@ -1,32 +1,22 @@
 [
   {
     "id": 1,
-    "titulo": "SUPER PROMOÇÃO DE MANTO",
-    "subtitulo": "PAGUE 3, LEVE 5 CAMISAS",
-    "descricao": "Válido para camisas modelo Torcedor e Jogador de qualquer liga.",
-    "tag": "OFERTA POR TEMPO LIMITADO",
-    "ctaTexto": "Aproveitar no WhatsApp",
-    "ctaLink": "#mais-vendidos",
-    "corFundo": "from-[#D10000] via-[#900000] to-[#0A0A0A]"
+    "titulo": "COLEÇÃO EXCLUSIVA 2024/2025",
+    "subtitulo": "MANTOS OFICIAIS DE CLUBES E SELEÇÕES",
+    "descricao": "Versões Torcedor, Jogador e Retrô com atendimento exclusivo no WhatsApp.",
+    "tag": "LANÇAMENTOS",
+    "ctaTexto": "Explorar Catálogo",
+    "ctaLink": "/camisas",
+    "corFundo": "from-[#0A0A0A] via-[#1A1A1A] to-[#262626]"
   },
   {
     "id": 2,
-    "titulo": "COMBO MANTO SAGRADO",
-    "subtitulo": "PAGUE 2, LEVE 3",
-    "descricao": "Monte seu trio com os lançamentos da temporada 2024/2025.",
-    "tag": "MAIS PEDIDO",
-    "ctaTexto": "Ver Camisas",
-    "ctaLink": "/camisas",
-    "corFundo": "from-[#0A0A0A] via-[#1A1A1A] to-[#D10000]"
-  },
-  {
-    "id": 3,
-    "titulo": "PRONTA ENTREGA IMEDIATA",
-    "subtitulo": "ENVIO EM ATÉ 24 HORAS",
-    "descricao": "Peças selecionadas com envio expresso para todo o Brasil.",
-    "tag": "ESTOQUE NO BRASIL",
+    "titulo": "PRONTA ENTREGA LOCAL",
+    "subtitulo": "ENTREGA RÁPIDA NA SUA REGIÃO",
+    "descricao": "Peças selecionadas com entrega em até 24 horas na cidade e cidades vizinhas.",
+    "tag": "ESTOQUE LOCAL",
     "ctaTexto": "Ver Pronta Entrega",
     "ctaLink": "/pronta-entrega",
-    "corFundo": "from-[#111111] via-[#222222] to-[#D10000]"
+    "corFundo": "from-[#171717] via-[#262626] to-[#0A0A0A]"
   }
 ]

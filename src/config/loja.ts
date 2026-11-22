@@ -1,10 +1,11 @@
 export const lojaConfig = {
-  nomeLoja: "IC Sports",
+  nomeLoja: "IF Legacy",
+  subtitulo: "Moda Esportiva",
   responsavel: "Ítalo Cauan",
   // Coloque o número do WhatsApp da loja (apenas números com DDI + DDD)
-  whatsapp: "5581999999999", 
-  instagram: "@icsports.oficial",
-  email: "contato@icsports.com.br",
+  whatsapp: "5588988453522", 
+  instagram: "@iflegacy.oficial",
+  email: "contato@iflegacy.com.br",
   cidade: "Recife - PE",
   fusoHorario: "America/Fortaleza",
   horarioAtendimento: {
@@ -17,11 +18,11 @@ export const lojaConfig = {
     horaFechamentoSabado: 14,
   },
   formasPagamento: [
-    "Pix com 5% de desconto",
+    "Pix",
     "Cartão de Crédito em até 12x",
-    "Link de Pagamento Seguro"
+    "Pagamento na Entrega (a combinar)"
   ],
-  prazoEntrega: "Pronta Entrega: postagem em até 24h. Encomendas: 7 a 15 dias úteis com rastreio Correios.",
+  prazoEntrega: "Pronta Entrega: entrega em até 24h na cidade e regiões vizinhas. Encomendas: 10 a 20 dias úteis.",
   // Se quiser sincronizar com o Google Sheets, coloque a URL CSV publicada aqui:
-  planilhaCsvUrl: "",
+  planilhaCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vREBfk-2E9l-avkdUf4ml6lm4eIcO4znFr03A9DhS2AaD9-poflYFAuFmW24xvUqC8pZtUmMso3ZVhH/pub?gid=788698414&single=true&output=csv",
 };

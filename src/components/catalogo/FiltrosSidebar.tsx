@@ -60,7 +60,7 @@ export function FiltrosSidebar({
           <button
             type="button"
             onClick={onLimpar}
-            className="inline-flex items-center gap-1 text-xs font-bold text-[#D10000] hover:underline cursor-pointer"
+            className="inline-flex items-center gap-1 text-xs font-bold text-[#0A0A0A] hover:underline cursor-pointer"
           >
             <RotateCcw size={12} aria-hidden="true" />
             <span>Limpar</span>
@@ -73,7 +73,7 @@ export function FiltrosSidebar({
         <span className="text-xs font-black uppercase tracking-wider text-[#0A0A0A] block">
           Versão
         </span>
-        <div className="space-y-1 text-xs font-semibold text-[#555555]">
+        <div className="space-y-1 text-xs font-semibold">
           {categorias.map((cat) => (
             <button
               key={cat.id}
@@ -81,8 +81,8 @@ export function FiltrosSidebar({
               onClick={() => onChangeFiltro("categoria", cat.id)}
               className={`w-full text-left px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 filtros.categoria === cat.id
-                  ? "bg-[#D10000] text-white font-bold"
-                  : "hover:bg-[#F4F4F4] text-[#444444]"
+                  ? "bg-[#0A0A0A] text-white font-bold"
+                  : "hover:bg-[#F5F5F5] text-[#525252]"
               }`}
             >
               {cat.label}
@@ -96,14 +96,14 @@ export function FiltrosSidebar({
         <span className="text-xs font-black uppercase tracking-wider text-[#0A0A0A] block">
           Campeonato / Liga
         </span>
-        <div className="space-y-1 text-xs font-semibold text-[#555555] max-h-48 overflow-y-auto pr-1">
+        <div className="space-y-1 text-xs font-semibold max-h-48 overflow-y-auto pr-1">
           <button
             type="button"
             onClick={() => onChangeFiltro("liga", "todas")}
             className={`w-full text-left px-3 py-2 rounded-lg transition-colors cursor-pointer ${
               filtros.liga === "todas"
-                ? "bg-[#D10000] text-white font-bold"
-                : "hover:bg-[#F4F4F4] text-[#444444]"
+                ? "bg-[#0A0A0A] text-white font-bold"
+                : "hover:bg-[#F5F5F5] text-[#525252]"
             }`}
           >
             Todas as Ligas
@@ -115,8 +115,8 @@ export function FiltrosSidebar({
               onClick={() => onChangeFiltro("liga", liga)}
               className={`w-full text-left px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 filtros.liga === liga
-                  ? "bg-[#D10000] text-white font-bold"
-                  : "hover:bg-[#F4F4F4] text-[#444444]"
+                  ? "bg-[#0A0A0A] text-white font-bold"
+                  : "hover:bg-[#F5F5F5] text-[#525252]"
               }`}
             >
               {liga}
@@ -136,8 +136,8 @@ export function FiltrosSidebar({
             onClick={() => onChangeFiltro("tamanho", "todos")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
               filtros.tamanho === "todos"
-                ? "bg-[#D10000] text-white"
-                : "bg-[#F4F4F4] text-[#555555] hover:bg-[#E5E5E5]"
+                ? "bg-[#0A0A0A] text-white"
+                : "bg-[#F5F5F5] text-[#525252] hover:bg-[#E5E5E5]"
             }`}
           >
             Todos
@@ -147,10 +147,10 @@ export function FiltrosSidebar({
               key={tam}
               type="button"
               onClick={() => onChangeFiltro("tamanho", tam)}
-              className={`w-9 h-9 rounded-lg text-xs font-athletic text-base font-bold transition-colors flex items-center justify-center cursor-pointer ${
+              className={`w-9 h-9 rounded-lg font-athletic text-base font-bold transition-colors flex items-center justify-center cursor-pointer ${
                 filtros.tamanho === tam
-                  ? "bg-[#D10000] text-white"
-                  : "bg-[#F4F4F4] text-[#0A0A0A] hover:bg-[#E5E5E5]"
+                  ? "bg-[#0A0A0A] text-white"
+                  : "bg-[#F5F5F5] text-[#0A0A0A] hover:bg-[#E5E5E5]"
               }`}
             >
               {tam}
@@ -164,7 +164,7 @@ export function FiltrosSidebar({
         <span className="text-xs font-black uppercase tracking-wider text-[#0A0A0A] block">
           Faixa de Preço
         </span>
-        <div className="space-y-1 text-xs font-semibold text-[#555555]">
+        <div className="space-y-1 text-xs font-semibold">
           {faixasPreco.map((faixa) => (
             <button
               key={faixa.id}
@@ -172,8 +172,8 @@ export function FiltrosSidebar({
               onClick={() => onChangeFiltro("faixaPreco", faixa.id)}
               className={`w-full text-left px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                 filtros.faixaPreco === faixa.id
-                  ? "bg-[#D10000] text-white font-bold"
-                  : "hover:bg-[#F4F4F4] text-[#444444]"
+                  ? "bg-[#0A0A0A] text-white font-bold"
+                  : "hover:bg-[#F5F5F5] text-[#525252]"
               }`}
             >
               {faixa.label}

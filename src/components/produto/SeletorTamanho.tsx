@@ -22,7 +22,7 @@ export function SeletorTamanho({
           Selecione o Tamanho
         </span>
         {tamanhoSelecionado && (
-          <span className="text-xs font-bold text-[#D10000]">
+          <span className="text-xs font-bold text-[#0A0A0A]">
             Selecionado: {tamanhoSelecionado}
           </span>
         )}
@@ -30,7 +30,7 @@ export function SeletorTamanho({
 
       <div className="grid grid-cols-5 gap-2.5" role="group" aria-label="Seletor de tamanhos">
         {listaTamanhos.map((tam) => {
-          const qtd = estoquePorTamanho[tam] !== undefined ? estoquePorTamanho[tam] : 1;
+          const qtd = estoquePorTamanho[tam] !== undefined ? estoquePorTamanho[tam] : 0;
           const esgotado = qtd <= 0;
           const selecionado = tamanhoSelecionado === tam;
 
@@ -42,21 +42,21 @@ export function SeletorTamanho({
               onClick={() => onSelecionar(tam)}
               className={`relative py-3 rounded-xl font-athletic text-xl font-bold flex flex-col items-center justify-center transition-all cursor-pointer ${
                 esgotado
-                  ? "bg-[#F4F4F4] text-[#AAAAAA] border border-[#E5E5E5] line-through cursor-not-allowed opacity-60"
+                  ? "bg-[#F5F5F5] text-[#A3A3A3] border border-[#E5E5E5] line-through cursor-not-allowed opacity-60"
                   : selecionado
-                  ? "bg-[#D10000] text-white border-2 border-[#D10000] shadow-md scale-102"
-                  : "bg-white text-[#0A0A0A] border border-[#E5E5E5] hover:border-[#0A0A0A]"
+                  ? "bg-[#0A0A0A] text-white border-2 border-black shadow-md scale-102"
+                  : "bg-white text-[#0A0A0A] border border-[#E5E5E5] hover:border-black"
               }`}
               aria-label={`Tamanho ${tam} ${esgotado ? "- Esgotado" : `- ${qtd} disponíveis`}`}
               aria-pressed={selecionado}
             >
               <span>{tam}</span>
               {esgotado ? (
-                <span className="text-[9px] font-sans font-bold uppercase tracking-tight -mt-1 text-[#999999]">
+                <span className="text-[9px] font-sans font-bold uppercase tracking-tight -mt-1 text-[#A3A3A3]">
                   Esgotado
                 </span>
               ) : qtd <= 2 ? (
-                <span className="text-[9px] font-sans font-extrabold uppercase tracking-tight -mt-1 text-amber-500">
+                <span className="text-[9px] font-sans font-extrabold uppercase tracking-tight -mt-1 text-[#737373]">
                   {qtd} un.
                 </span>
               ) : null}

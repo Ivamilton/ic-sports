@@ -37,7 +37,7 @@ export function GaleriaFotos({ imagens, nome }: GaleriaFotosProps) {
               onClick={() => setImagemAtiva(idx)}
               className={`relative w-20 h-20 rounded-xl bg-[#F4F4F4] border-2 overflow-hidden shrink-0 transition-all cursor-pointer ${
                 imagemAtiva === idx
-                  ? "border-[#D10000] ring-2 ring-[#D10000]/20 shadow-xs"
+                  ? "border-[#0A0A0A] ring-2 ring-black/10 shadow-xs"
                   : "border-[#E5E5E5] hover:border-[#CCCCCC]"
               }`}
               aria-label={`Ver foto ${idx + 1} de ${nome}`}

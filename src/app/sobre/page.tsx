@@ -38,52 +38,52 @@ export default function SobrePage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-12">
       {/* Título Principal */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <span className="text-xs font-black uppercase tracking-widest text-[#D10000]">
+        <span className="text-xs font-black uppercase tracking-widest text-[#737373]">
           Quem Somos & Contato
         </span>
         <h1 className="font-athletic text-4xl sm:text-6xl font-black uppercase tracking-wide text-[#0A0A0A]">
           Sobre a {lojaConfig.nomeLoja}
         </h1>
-        <p className="text-sm sm:text-base text-[#666666] leading-relaxed">
-          Nascemos da paixão por futebol e colecionismo de camisas de time, oferecendo o padrão que todo torcedor merece.
+        <p className="text-sm sm:text-base text-[#737373] leading-relaxed">
+          Nascemos da paixão por futebol e colecionismo de camisas de time, oferecendo mantos oficiais com atendimento direto.
         </p>
       </div>
 
       {/* Grid de Apresentação e Status de Atendimento */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         {/* Card de Status de Atendimento em Tempo Real (America/Fortaleza) */}
-        <div className="md:col-span-1 p-6 rounded-3xl bg-[#0A0A0A] text-white space-y-6 shadow-xl border border-black">
+        <div className="md:col-span-1 p-6 rounded-3xl bg-[#0A0A0A] text-white space-y-6 shadow-xl border border-[#262626]">
           <div className="space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-[#D10000]">
+            <span className="text-[10px] font-black uppercase tracking-widest text-[#A3A3A3]">
               Status de Atendimento
             </span>
             <div className="flex items-center gap-2.5">
               <span
                 className={`w-3.5 h-3.5 rounded-full ${
-                  status.aberto ? "bg-emerald-500 animate-pulse" : "bg-red-500"
+                  status.aberto ? "bg-emerald-500 animate-pulse" : "bg-neutral-500"
                 }`}
               />
               <h2 className="font-athletic text-2xl font-bold uppercase tracking-wider">
                 {status.aberto ? "Aberto Agora" : "Fechado Agora"}
               </h2>
             </div>
-            <p className="text-xs text-[#AAAAAA] leading-relaxed">
+            <p className="text-xs text-[#A3A3A3] leading-relaxed">
               {status.mensagem}
             </p>
-            <p className="text-[11px] font-semibold text-[#777777] pt-1">
+            <p className="text-[11px] font-semibold text-[#737373] pt-1">
               {status.horarioAtualFormatado}
             </p>
           </div>
 
-          <div className="pt-4 border-t border-[#222222] space-y-3 text-xs">
-            <p className="font-bold text-white uppercase tracking-wider">Horários Oficiais:</p>
-            <p className="text-[#AAAAAA]">
+          <div className="pt-4 border-t border-[#262626] space-y-3 text-xs">
+            <p className="font-bold text-white uppercase tracking-wider">Horários de Atendimento:</p>
+            <p className="text-[#A3A3A3]">
               <strong>Seg - Sex:</strong> 09:00 às 19:00
             </p>
-            <p className="text-[#AAAAAA]">
+            <p className="text-[#A3A3A3]">
               <strong>Sábado:</strong> 09:00 às 14:00
             </p>
-            <p className="text-[#AAAAAA]">
+            <p className="text-[#A3A3A3]">
               <strong>Domingo:</strong> Fechado (pedidos recebidos serão atendidos no próximo dia útil)
             </p>
           </div>
@@ -107,11 +107,11 @@ export default function SobrePage() {
             <h3 className="font-athletic text-3xl font-black uppercase tracking-wider text-[#0A0A0A]">
               Nossa Proposta
             </h3>
-            <p className="text-sm text-[#555555] leading-relaxed">
-              A <strong className="text-[#0A0A0A]">{lojaConfig.nomeLoja}</strong>, liderada por <strong className="text-[#D10000]">{lojaConfig.responsavel}</strong>, foi criada para atender torcedores e colecionadores exigentes. Selecionamos apenas mantos com tecido de alta tecnologia, costuras reforçadas e escudos com acabamento idêntico ao oficial das marcas esportivas mundiais.
+            <p className="text-sm text-[#525252] leading-relaxed">
+              A <strong className="text-[#0A0A0A]">{lojaConfig.nomeLoja}</strong>, liderada por <strong className="text-[#0A0A0A]">{lojaConfig.responsavel}</strong>, foi criada para atender torcedores e colecionadores exigentes. Selecionamos apenas mantos com tecido de alta tecnologia, costuras reforçadas e escudos com acabamento idêntico ao oficial das marcas esportivas mundiais.
             </p>
-            <p className="text-sm text-[#555555] leading-relaxed">
-              Diferente de grandes sites automatizados e impessoais, nosso modelo é focado em <strong>atendimento consultivo pelo WhatsApp</strong>: conferimos as medidas exatas da camisa com você antes de enviar, enviamos fotos e códigos de rastreio para garantir que seu manto chegue perfeito.
+            <p className="text-sm text-[#525252] leading-relaxed">
+              Diferente de grandes sites automatizados e impessoais, nosso modelo é focado em <strong>atendimento consultivo pelo WhatsApp</strong>: tiramos dúvidas de tamanho, confirmamos medidas da camisa com você antes da entrega e disponibilizamos entrega rápida na cidade e regiões próximas.
             </p>
           </div>
 
@@ -126,13 +126,13 @@ export default function SobrePage() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-[#F9F9F9] hover:bg-[#F0FDF4] border border-[#EBEBEB] flex items-center gap-3 transition-colors"
+                className="p-4 rounded-2xl bg-[#F5F5F5] hover:bg-[#EAEAEA] border border-[#E5E5E5] flex items-center gap-3 transition-colors"
               >
                 <div className="p-2.5 rounded-xl bg-[#25D366] text-white">
                   <MessageCircle size={18} aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-[11px] text-[#888888] uppercase">WhatsApp Direto</p>
+                  <p className="text-[11px] text-[#737373] uppercase">WhatsApp Direto</p>
                   <p className="text-sm font-bold text-[#0A0A0A]">{lojaConfig.whatsapp}</p>
                 </div>
               </a>
@@ -141,13 +141,13 @@ export default function SobrePage() {
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-[#F9F9F9] hover:bg-[#FDF2F8] border border-[#EBEBEB] flex items-center gap-3 transition-colors"
+                className="p-4 rounded-2xl bg-[#F5F5F5] hover:bg-[#EAEAEA] border border-[#E5E5E5] flex items-center gap-3 transition-colors"
               >
-                <div className="p-2.5 rounded-xl bg-[#E1306C] text-white">
+                <div className="p-2.5 rounded-xl bg-[#0A0A0A] text-white">
                   <InstagramIcon size={18} />
                 </div>
                 <div>
-                  <p className="text-[11px] text-[#888888] uppercase">Instagram Oficial</p>
+                  <p className="text-[11px] text-[#737373] uppercase">Instagram Oficial</p>
                   <p className="text-sm font-bold text-[#0A0A0A]">{lojaConfig.instagram}</p>
                 </div>
               </a>

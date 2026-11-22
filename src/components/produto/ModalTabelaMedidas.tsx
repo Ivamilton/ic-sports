@@ -11,7 +11,7 @@ export function ModalTabelaMedidas() {
       <button
         type="button"
         onClick={() => setAberto(true)}
-        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D10000] hover:underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D10000] rounded"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0A0A0A] hover:underline cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded"
       >
         <Ruler size={14} aria-hidden="true" />
         <span>Ver Guia de Medidas</span>
@@ -28,7 +28,7 @@ export function ModalTabelaMedidas() {
           <div className="relative bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl z-10 space-y-5 animate-fade-in">
             <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-3">
               <div className="flex items-center gap-2">
-                <Ruler size={20} className="text-[#D10000]" aria-hidden="true" />
+                <Ruler size={20} className="text-[#0A0A0A]" aria-hidden="true" />
                 <h3 className="font-athletic text-2xl font-bold uppercase tracking-wider text-[#0A0A0A]">
                   Tabela de Medidas (cm)
                 </h3>
@@ -45,7 +45,7 @@ export function ModalTabelaMedidas() {
 
             <div className="space-y-4">
               <div>
-                <h4 className="text-xs font-black uppercase tracking-wider text-[#D10000] mb-2">
+                <h4 className="text-xs font-black uppercase tracking-wider text-[#0A0A0A] mb-2">
                   1. Versão Torcedor (Corte Padrão / Tradicional)
                 </h4>
                 <div className="overflow-x-auto">
@@ -99,7 +99,7 @@ export function ModalTabelaMedidas() {
             <button
               type="button"
               onClick={() => setAberto(false)}
-              className="w-full py-2.5 bg-[#0A0A0A] hover:bg-[#222222] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-colors"
+              className="w-full py-2.5 bg-[#0A0A0A] hover:bg-[#222222] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
             >
               Entendido, fechar
             </button>

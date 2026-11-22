@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProdutosPorTime, getProdutos } from "@/lib/getProducts";
+import { getProdutosPorTime } from "@/lib/getProducts";
 import { CardProduto } from "@/components/produto/CardProduto";
 import { ChevronLeft, Trophy } from "lucide-react";
 import { lojaConfig } from "@/config/loja";
@@ -35,7 +35,7 @@ export default async function TimePage({ params }: PageProps) {
       <div>
         <Link
           href="/camisas"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#666666] hover:text-[#D10000] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#737373] hover:text-[#0A0A0A] transition-colors"
         >
           <ChevronLeft size={16} aria-hidden="true" />
           <span>Voltar ao catálogo geral</span>
@@ -43,29 +43,29 @@ export default async function TimePage({ params }: PageProps) {
       </div>
 
       <div className="pb-6 border-b border-[#E5E5E5] space-y-2">
-        <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-[#D10000]">
+        <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-[#0A0A0A]">
           <Trophy size={14} aria-hidden="true" />
           <span>Coleção Oficial</span>
         </div>
         <h1 className="font-athletic text-4xl sm:text-6xl font-black uppercase tracking-wide text-[#0A0A0A]">
           {nomeTime}
         </h1>
-        <p className="text-xs sm:text-sm text-[#666666]">
+        <p className="text-xs sm:text-sm text-[#737373]">
           {produtos.length} {produtos.length === 1 ? "manto disponível" : "mantos disponíveis"} deste clube / seleção
         </p>
       </div>
 
       {produtos.length === 0 ? (
-        <div className="p-16 text-center bg-[#F9F9F9] rounded-2xl border border-dashed border-[#CCCCCC] space-y-4">
+        <div className="p-16 text-center bg-[#F5F5F5] rounded-2xl border border-dashed border-[#E5E5E5] space-y-4">
           <p className="font-athletic text-2xl font-bold uppercase text-[#0A0A0A]">
             Nenhuma camisa cadastrada no momento para {nomeTime}
           </p>
-          <p className="text-xs sm:text-sm text-[#666666] max-w-md mx-auto">
-            Gostaria de encomendar este manto? Entre em contato diretamente no WhatsApp do Ítalo Cauan.
+          <p className="text-xs sm:text-sm text-[#737373] max-w-md mx-auto">
+            Gostaria de encomendar este manto? Entre em contato diretamente no WhatsApp de {lojaConfig.responsavel}.
           </p>
           <Link
             href="/camisas"
-            className="inline-block px-6 py-3 bg-[#D10000] text-white font-bold text-xs uppercase tracking-wider rounded-xl"
+            className="inline-block px-6 py-3 bg-[#0A0A0A] hover:bg-[#262626] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-colors"
           >
             Ver outros clubes
           </Link>

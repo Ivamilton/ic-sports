@@ -20,7 +20,7 @@ export function FloatingWhatsapp() {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chamar atendimento da IC Sports no WhatsApp"
+        aria-label="Chamar atendimento da IF Legacy no WhatsApp"
         className="w-14 h-14 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] transition-all transform hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 cursor-pointer"
       >
         <MessageCircle size={30} aria-hidden="true" />

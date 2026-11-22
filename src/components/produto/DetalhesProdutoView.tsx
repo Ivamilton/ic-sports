@@ -8,7 +8,8 @@ import { SeletorTamanho } from "@/components/produto/SeletorTamanho";
 import { ModalTabelaMedidas } from "@/components/produto/ModalTabelaMedidas";
 import { BotaoComprarWhatsapp } from "@/components/produto/BotaoComprarWhatsapp";
 import { ProdutosRelacionados } from "@/components/produto/ProdutosRelacionados";
-import { ShieldCheck, Truck, MessageCircle, ChevronLeft, Flame, AlertCircle } from "lucide-react";
+import { ShieldCheck, Truck, MessageCircle, ChevronLeft, AlertCircle, ShoppingBag } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 interface DetalhesProdutoViewProps {
   produto: Produto;
@@ -19,6 +20,8 @@ const formatarBRL = (valor: number) =>
   valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 export function DetalhesProdutoView({ produto, relacionados }: DetalhesProdutoViewProps) {
+  const { adicionarAoCarrinho } = useCart();
+
   // Tamanho inicial selecionado: primeiro tamanho disponível com estoque
   const tamanhoInicial =
     produto.tamanhos_disponiveis.find(
@@ -29,15 +32,11 @@ export function DetalhesProdutoView({ produto, relacionados }: DetalhesProdutoVi
 
   const isEsgotado = produto.totalEstoque <= 0;
   const precoAtual = produto.preco_promocional || produto.preco;
-  const temPromocao = produto.preco_promocional && produto.preco_promocional < produto.preco;
-  const descontoPercentual = temPromocao
-    ? Math.round(((produto.preco - produto.preco_promocional!) / produto.preco) * 100)
-    : 0;
 
   const estoqueTamanhoSelecionado =
     produto.quantidade_em_estoque_por_tamanho[tamanho] !== undefined
       ? produto.quantidade_em_estoque_por_tamanho[tamanho]
-      : 1;
+      : 0;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
@@ -45,7 +44,7 @@ export function DetalhesProdutoView({ produto, relacionados }: DetalhesProdutoVi
       <div>
         <Link
           href="/camisas"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#666666] hover:text-[#D10000] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#737373] hover:text-[#0A0A0A] transition-colors"
         >
           <ChevronLeft size={16} aria-hidden="true" />
           <span>Voltar ao catálogo</span>
@@ -61,13 +60,13 @@ export function DetalhesProdutoView({ produto, relacionados }: DetalhesProdutoVi
         <div className="space-y-6">
           {/* Breadcrumbs e Badges */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="px-2.5 py-1 bg-[#F4F4F4] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider rounded-md">
+            <span className="px-2.5 py-1 bg-[#F5F5F5] text-[#0A0A0A] font-bold text-xs uppercase tracking-wider rounded-md">
               {produto.liga}
             </span>
             <span className="px-2.5 py-1 bg-[#0A0A0A] text-white font-bold text-xs uppercase tracking-wider rounded-md">
               Versão {produto.categoria}
             </span>
-            <span className="text-xs font-bold text-[#666666]">
+            <span className="text-xs font-bold text-[#737373]">
               Temporada {produto.temporada}
             </span>
           </div>
@@ -78,23 +77,13 @@ export function DetalhesProdutoView({ produto, relacionados }: DetalhesProdutoVi
           </h1>
 
           {/* Bloco de Preço */}
-          <div className="p-4 rounded-2xl bg-[#F9F9F9] border border-[#EBEBEB] space-y-1">
+          <div className="p-4 rounded-2xl bg-[#F9F9F9] border border-[#E5E5E5] space-y-1">
             <div className="flex items-baseline gap-3">
-              {temPromocao && (
-                <span className="text-sm sm:text-base text-[#888888] line-through font-semibold">
-                  {formatarBRL(produto.preco)}
-                </span>
-              )}
-              <span className="font-athletic text-4xl sm:text-5xl font-black text-[#D10000] tracking-wide">
+              <span className="font-athletic text-4xl sm:text-5xl font-black text-[#0A0A0A] tracking-wide">
                 {formatarBRL(precoAtual)}
               </span>
-              {temPromocao && (
-                <span className="px-2 py-0.5 bg-[#D10000] text-white text-xs font-black uppercase rounded-md">
-                  Economize {formatarBRL(produto.preco - produto.preco_promocional!)} ({descontoPercentual}% OFF)
-                </span>
-              )}
             </div>
-            <p className="text-xs font-medium text-[#666666]">
+            <p className="text-xs font-medium text-[#737373]">
               À vista no Pix ou em até 12x no cartão de crédito
             </p>
           </div>
@@ -110,13 +99,13 @@ export function DetalhesProdutoView({ produto, relacionados }: DetalhesProdutoVi
 
             {/* Aviso de estoque do tamanho selecionado */}
             {estoqueTamanhoSelecionado === 0 ? (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-xs font-bold text-red-700">
+              <div className="p-3 bg-[#F5F5F5] border border-[#E5E5E5] rounded-xl flex items-center gap-2 text-xs font-bold text-[#737373]">
                 <AlertCircle size={16} aria-hidden="true" />
                 <span>O tamanho {tamanho} está esgotado no momento. Escolha outro tamanho ou consulte encomenda no WhatsApp.</span>
               </div>
             ) : estoqueTamanhoSelecionado <= 3 ? (
-              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2 text-xs font-bold text-amber-800">
-                <Flame size={16} className="text-amber-600" aria-hidden="true" />
+              <div className="p-3 bg-[#0A0A0A] text-white rounded-xl flex items-center gap-2 text-xs font-bold">
+                <AlertCircle size={16} className="text-white" aria-hidden="true" />
                 <span>Atenção: Restam apenas {estoqueTamanhoSelecionado} {estoqueTamanhoSelecionado === 1 ? "unidade" : "unidades"} no tamanho {tamanho}!</span>
               </div>
             ) : null}
@@ -127,30 +116,41 @@ export function DetalhesProdutoView({ produto, relacionados }: DetalhesProdutoVi
             </div>
           </div>
 
-          {/* Botão de Compra no WhatsApp */}
-          <div className="pt-4">
+          {/* Botões de Ação: Adicionar ao Carrinho + Comprar no WhatsApp */}
+          <div className="pt-4 space-y-3">
+            <button
+              type="button"
+              disabled={isEsgotado || estoqueTamanhoSelecionado === 0}
+              onClick={() => adicionarAoCarrinho(produto, tamanho)}
+              className="w-full py-4 px-6 rounded-2xl bg-[#0A0A0A] hover:bg-[#262626] text-white font-black text-base sm:text-lg uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-3 cursor-pointer group hover:scale-101 active:scale-98 disabled:bg-[#E5E5E5] disabled:text-[#888888] disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/20"
+            >
+              <ShoppingBag size={22} className="group-hover:scale-110 transition-transform" aria-hidden="true" />
+              <span>Adicionar ao Carrinho</span>
+            </button>
+
             <BotaoComprarWhatsapp
               produto={produto}
               tamanhoSelecionado={tamanho}
               desabilitado={isEsgotado || estoqueTamanhoSelecionado === 0}
             />
-            <p className="text-center text-xs font-semibold text-[#777777] mt-3">
-              ⚡ Ao clicar, abre o WhatsApp com o modelo e tamanho escolhidos pré-preenchidos.
+
+            <p className="text-center text-xs font-semibold text-[#737373] mt-2">
+              💡 Você pode adicionar várias camisas ao carrinho ou pedir direto no WhatsApp.
             </p>
           </div>
 
           {/* Selos de Confiança */}
           <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[#E5E5E5] text-center">
             <div className="p-3 bg-[#F9F9F9] rounded-xl space-y-1">
-              <ShieldCheck size={20} className="text-[#D10000] mx-auto" aria-hidden="true" />
+              <ShieldCheck size={20} className="text-[#0A0A0A] mx-auto" aria-hidden="true" />
               <p className="text-[11px] font-bold text-[#0A0A0A]">Qualidade Oficial</p>
             </div>
             <div className="p-3 bg-[#F9F9F9] rounded-xl space-y-1">
-              <Truck size={20} className="text-[#D10000] mx-auto" aria-hidden="true" />
-              <p className="text-[11px] font-bold text-[#0A0A0A]">Envio com Rastreio</p>
+              <Truck size={20} className="text-[#0A0A0A] mx-auto" aria-hidden="true" />
+              <p className="text-[11px] font-bold text-[#0A0A0A]">Entrega Local</p>
             </div>
             <div className="p-3 bg-[#F9F9F9] rounded-xl space-y-1">
-              <MessageCircle size={20} className="text-[#D10000] mx-auto" aria-hidden="true" />
+              <MessageCircle size={20} className="text-[#25D366] mx-auto" aria-hidden="true" />
               <p className="text-[11px] font-bold text-[#0A0A0A]">Suporte Direto</p>
             </div>
           </div>

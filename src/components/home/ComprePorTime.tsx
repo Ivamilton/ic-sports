@@ -11,18 +11,18 @@ interface ComprePorTimeProps {
 }
 
 const abasTimes = [
-  { id: "selecoes", rotulo: "Seleções Mundiais", filtro: "Seleções Mundiais" },
-  { id: "brasileirao", rotulo: "Brasileirão", filtro: "Brasileirão" },
-  { id: "premier-league", rotulo: "Premier League", filtro: "Premier League" },
+  { id: "selecoes", rotulo: "Seleções Mundiais", filtro: "Seleç" },
+  { id: "brasileirao", rotulo: "Brasileirão", filtro: "Brasileir" },
+  { id: "premier-league", rotulo: "Premier League", filtro: "Premier" },
   { id: "la-liga", rotulo: "La Liga", filtro: "La Liga" },
 ];
 
 export function ComprePorTime({ produtos }: ComprePorTimeProps) {
   const [abaAtiva, setAbaAtiva] = useState(abasTimes[0].id);
 
-  const filtroAtual = abasTimes.find((a) => a.id === abaAtiva)?.filtro || "";
+  const filtroAtual = (abasTimes.find((a) => a.id === abaAtiva)?.filtro || "").toLowerCase();
   const produtosFiltrados = produtos
-    .filter((p) => p.liga.toLowerCase() === filtroAtual.toLowerCase())
+    .filter((p) => p.liga.toLowerCase().includes(filtroAtual))
     .slice(0, 4);
 
   return (
@@ -31,7 +31,7 @@ export function ComprePorTime({ produtos }: ComprePorTimeProps) {
         {/* Título da Seção */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#D10000]">
+            <span className="text-xs font-black uppercase tracking-widest text-[#737373]">
               Clubes & Seleções
             </span>
             <h2 className="font-athletic text-4xl sm:text-5xl font-black uppercase tracking-wide text-[#0A0A0A]">
@@ -41,7 +41,7 @@ export function ComprePorTime({ produtos }: ComprePorTimeProps) {
 
           <Link
             href="/camisas"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#D10000] hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#0A0A0A] hover:underline"
           >
             <span>Ver todos os times</span>
             <ArrowRight size={16} aria-hidden="true" />
@@ -58,10 +58,10 @@ export function ComprePorTime({ produtos }: ComprePorTimeProps) {
                 role="tab"
                 aria-selected={ativo}
                 onClick={() => setAbaAtiva(aba.id)}
-                className={`px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D10000] ${
+                className={`px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm whitespace-nowrap transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black ${
                   ativo
-                    ? "bg-[#D10000] text-white shadow-sm"
-                    : "bg-[#F4F4F4] text-[#666666] hover:bg-[#E5E5E5] hover:text-[#0A0A0A]"
+                    ? "bg-[#0A0A0A] text-white shadow-xs"
+                    : "bg-[#F5F5F5] text-[#737373] hover:bg-[#E5E5E5] hover:text-[#0A0A0A]"
                 }`}
               >
                 {aba.rotulo}
@@ -72,7 +72,7 @@ export function ComprePorTime({ produtos }: ComprePorTimeProps) {
 
         {/* Grid de Produtos do Time/Liga selecionado */}
         {produtosFiltrados.length === 0 ? (
-          <div className="p-12 text-center bg-[#F4F4F4] rounded-2xl text-[#666666] text-sm font-medium">
+          <div className="p-12 text-center bg-[#F5F5F5] rounded-2xl text-[#737373] text-sm font-medium">
             Novos modelos desta competição estão sendo adicionados ao estoque.
           </div>
         ) : (

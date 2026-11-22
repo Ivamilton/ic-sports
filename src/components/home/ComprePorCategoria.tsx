@@ -5,7 +5,7 @@ const categorias = [
   {
     nome: "Pronta Entrega",
     sub: "Envio Imediato",
-    tag: "ESTOQUE NO BRASIL",
+    tag: "ESTOQUE LOCAL",
     href: "/pronta-entrega",
     icone: Zap,
     corFundo: "bg-[#0A0A0A] text-white border-black",
@@ -35,7 +35,7 @@ const categorias = [
     tag: "RARIDADES",
     href: "/camisas?categoria=retro",
     icone: History,
-    corFundo: "bg-[#F4F4F4] text-[#0A0A0A] border-[#E5E5E5]",
+    corFundo: "bg-[#F5F5F5] text-[#0A0A0A] border-[#E5E5E5]",
     destaque: false,
   },
   {
@@ -51,10 +51,10 @@ const categorias = [
 
 export function ComprePorCategoria() {
   return (
-    <section className="py-14 sm:py-20 bg-[#F4F4F4] border-b border-[#E5E5E5]">
+    <section className="py-14 sm:py-20 bg-[#F5F5F5] border-b border-[#E5E5E5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
         <div>
-          <span className="text-xs font-black uppercase tracking-widest text-[#D10000]">
+          <span className="text-xs font-black uppercase tracking-widest text-[#737373]">
             Navegue por Estilo
           </span>
           <h2 className="font-athletic text-4xl sm:text-5xl font-black uppercase tracking-wide text-[#0A0A0A]">
@@ -74,17 +74,17 @@ export function ComprePorCategoria() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`p-2.5 rounded-xl ${cat.destaque ? "bg-[#D10000] text-white" : "bg-[#F4F4F4] text-[#D10000]"}`}>
-                      <Icon size={22} aria-hidden="true" />
+                    <div className={`p-2.5 rounded-xl ${cat.destaque ? "bg-white text-[#0A0A0A]" : "bg-[#0A0A0A] text-white"}`}>
+                      <Icon size={20} aria-hidden="true" />
                     </div>
                     <ArrowUpRight
                       size={18}
-                      className="text-[#999999] group-hover:text-[#D10000] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                      className="text-[#999999] group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                       aria-hidden="true"
                     />
                   </div>
 
-                  <span className={`text-[10px] font-black uppercase tracking-wider block mb-1 ${cat.destaque ? "text-[#D10000]" : "text-[#888888]"}`}>
+                  <span className={`text-[10px] font-black uppercase tracking-wider block mb-1 ${cat.destaque ? "text-[#A3A3A3]" : "text-[#737373]"}`}>
                     {cat.tag}
                   </span>
                   <h3 className="font-athletic text-2xl font-black uppercase leading-tight tracking-wide">
@@ -92,7 +92,7 @@ export function ComprePorCategoria() {
                   </h3>
                 </div>
 
-                <p className="text-xs font-medium text-[#777777] mt-3">
+                <p className={`text-xs font-medium mt-3 ${cat.destaque ? "text-[#A3A3A3]" : "text-[#737373]"}`}>
                   {cat.sub}
                 </p>
               </Link>
