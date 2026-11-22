@@ -68,12 +68,6 @@ export function Header() {
               Catálogo
             </Link>
             <Link
-              href="/camisas?origem=clubes"
-              className="text-[#0A0A0A] hover:text-[#525252] transition-colors py-1 border-b-2 border-transparent hover:border-black whitespace-nowrap"
-            >
-              Clubes
-            </Link>
-            <Link
               href="/time/brasil"
               className="text-[#0A0A0A] hover:text-[#525252] transition-colors py-1 border-b-2 border-transparent hover:border-black whitespace-nowrap"
             >
