@@ -238,7 +238,7 @@ async function carregarProdutosDaFonte(): Promise<Produto[]> {
     try {
       const res = await fetch(lojaConfig.planilhaCsvUrl, {
         cache: "force-cache",
-        next: { revalidate: 300 },
+        next: { revalidate: 30 },
       });
       if (res.ok) {
         const csv = await res.text();
@@ -267,8 +267,8 @@ async function carregarProdutosDaFonte(): Promise<Produto[]> {
 
 export const getProdutos = unstable_cache(
   carregarProdutosDaFonte,
-  ["ic-sports-produtos-v1"],
-  { revalidate: 300 }
+  ["ic-sports-produtos-v2"],
+  { revalidate: 30 }
 );
 
 export const getProdutoPorSlug = cache(async (slug: string): Promise<Produto | null> => {

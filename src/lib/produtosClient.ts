@@ -1,6 +1,6 @@
 import type { Produto } from "@/lib/getProducts";
 
-const TTL_MS = 5 * 60 * 1000;
+const TTL_MS = 30 * 1000;
 const STORAGE_KEY = "iflegacy_produtos_v1";
 
 let produtosEmMemoria: Produto[] | null = null;
