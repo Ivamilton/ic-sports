@@ -1,18 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, Search, MessageCircle, Zap, ShoppingBag } from "lucide-react";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { gerarLinkWhatsAppGeral } from "@/lib/whatsapp";
 import { useCart } from "@/context/CartContext";
+import { Produto } from "@/lib/getProducts";
+
+function normalizarTexto(texto: string) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
 export function Header() {
   const [drawerAberto, setDrawerAberto] = useState(false);
   const [termoBusca, setTermoBusca] = useState("");
+  const [buscaAberta, setBuscaAberta] = useState(false);
+  const [produtos, setProdutos] = useState<Produto[]>([]);
+  const buscaRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const { totalItens, abrirCarrinho } = useCart();
+
+  const sugestoes = useMemo(() => {
+    const termo = normalizarTexto(termoBusca.trim());
+    if (termo.length < 2) return [];
+
+    return produtos
+      .filter((produto) =>
+        normalizarTexto(`${produto.nome} ${produto.time} ${produto.liga}`).includes(termo)
+      )
+      .slice(0, 5);
+  }, [produtos, termoBusca]);
+
+  useEffect(() => {
+    const fecharAoClicarFora = (evento: MouseEvent) => {
+      if (buscaRef.current && !buscaRef.current.contains(evento.target as Node)) {
+        setBuscaAberta(false);
+      }
+    };
+
+    document.addEventListener("mousedown", fecharAoClicarFora);
+    return () => document.removeEventListener("mousedown", fecharAoClicarFora);
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/produtos", { cache: "no-store" })
+      .then((resposta) => resposta.ok ? resposta.json() : [])
+      .then((dados: Produto[]) => setProdutos(dados))
+      .catch(() => setProdutos([]));
+  }, []);
 
   const handleBusca = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,15 +118,56 @@ export function Header() {
           {/* Lado Direito: Barra de Busca + Cards Proporcionais */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Campo de Busca Rápida (Desktop) */}
-            <form onSubmit={handleBusca} className="hidden xl:flex relative items-center w-40">
+            <form ref={buscaRef} onSubmit={handleBusca} className="hidden xl:flex relative items-center w-56">
               <input
                 type="text"
                 placeholder="Buscar camisa…"
                 value={termoBusca}
-                onChange={(e) => setTermoBusca(e.target.value)}
+                onChange={(e) => {
+                  setTermoBusca(e.target.value);
+                  setBuscaAberta(true);
+                }}
+                onFocus={() => termoBusca.trim().length >= 2 && setBuscaAberta(true)}
+                aria-label="Buscar camisa"
+                aria-expanded={buscaAberta && sugestoes.length > 0}
                 className="w-full pl-9 pr-3 py-2 text-xs font-medium bg-[#F5F5F5] border border-[#E5E5E5] rounded-xl focus:bg-white focus:border-black focus:ring-2 focus:ring-black/10 focus:outline-none transition-all placeholder:text-[#888888]"
               />
               <Search size={15} className="absolute left-3 text-[#666666] pointer-events-none" aria-hidden="true" />
+
+              {buscaAberta && termoBusca.trim().length >= 2 && (
+                <div className="absolute top-full right-0 mt-2 w-[320px] bg-white border border-[#E5E5E5] rounded-2xl shadow-xl overflow-hidden z-50">
+                  {sugestoes.length > 0 ? (
+                    sugestoes.map((produto) => (
+                      <Link
+                        key={produto.id}
+                        href={`/produto/${produto.slug}`}
+                        onClick={() => {
+                          setBuscaAberta(false);
+                          setTermoBusca("");
+                        }}
+                        className="flex items-center gap-3 px-3 py-2.5 hover:bg-[#F5F5F5] transition-colors"
+                      >
+                        <img
+                          src={produto.imagens[0]}
+                          alt={produto.nome}
+                          className="w-12 h-12 rounded-lg object-cover bg-[#F5F5F5]"
+                        />
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold text-[#0A0A0A] truncate">{produto.nome}</p>
+                          <p className="text-[11px] text-[#737373] truncate">{produto.time} · {produto.liga}</p>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <button
+                      type="submit"
+                      className="w-full px-4 py-3 text-left text-xs font-bold text-[#737373] hover:bg-[#F5F5F5]"
+                    >
+                      Buscar “{termoBusca.trim()}” no catálogo
+                    </button>
+                  )}
+                </div>
+              )}
             </form>
 
             {/* Card Pronta Entrega Proporcional */}

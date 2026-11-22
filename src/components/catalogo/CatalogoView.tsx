@@ -13,6 +13,13 @@ interface CatalogoViewProps {
   produtosIniciais: Produto[];
 }
 
+function normalizarTexto(texto: string) {
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
 export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
   const searchParams = useSearchParams();
   const buscaParam = searchParams.get("busca") || "";
@@ -79,12 +86,12 @@ export function CatalogoView({ produtosIniciais }: CatalogoViewProps) {
 
     // Busca por texto
     if (busca.trim()) {
-      const termo = busca.toLowerCase().trim();
+      const termo = normalizarTexto(busca.trim());
       lista = lista.filter(
         (p) =>
-          p.nome.toLowerCase().includes(termo) ||
-          p.time.toLowerCase().includes(termo) ||
-          p.liga.toLowerCase().includes(termo)
+          normalizarTexto(p.nome).includes(termo) ||
+          normalizarTexto(p.time).includes(termo) ||
+          normalizarTexto(p.liga).includes(termo)
       );
     }
 

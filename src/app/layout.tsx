@@ -4,18 +4,20 @@ import { TopTicker } from "@/components/layout/TopTicker";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsapp } from "@/components/layout/FloatingWhatsapp";
+import { CartProvider } from "@/context/CartContext";
+import { CartDrawer } from "@/components/carrinho/CartDrawer";
 import { lojaConfig } from "@/config/loja";
 
 export const viewport: Viewport = {
-  themeColor: "#D10000",
+  themeColor: "#0A0A0A",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  title: "IC | Loja Oficial",
+  title: "IF Legacy | Loja Oficial",
   description: `Catálogo de camisas de time da ${lojaConfig.nomeLoja}. Modelos Torcedor, Jogador e Retrô com pedido direto no WhatsApp com ${lojaConfig.responsavel}.`,
-  keywords: ["camisas de time", "camisas de futebol", "manto", "IC Sports", "futebol", "camisa de time whatsapp"],
+  keywords: ["camisas de time", "camisas de futebol", "manto", "IF Legacy", "futebol", "camisa de time whatsapp"],
   authors: [{ name: lojaConfig.responsavel }],
   icons: {
     icon: "/logo.png?v=1",
@@ -45,20 +47,25 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#0A0A0A] font-sans antialiased">
-        {/* Faixa Superior Rolante de Benefícios */}
-        <TopTicker />
+        <CartProvider>
+          {/* Faixa Superior Rolante de Benefícios */}
+          <TopTicker />
 
-        {/* Cabeçalho Limpo com Logo e Menu */}
-        <Header />
+          {/* Cabeçalho Limpo com Logo e Menu */}
+          <Header />
 
-        {/* Conteúdo Principal */}
-        <main className="flex-1">{children}</main>
+          {/* Conteúdo Principal */}
+          <main className="flex-1">{children}</main>
 
-        {/* Botão Flutuante de WhatsApp */}
-        <FloatingWhatsapp />
+          {/* Gaveta Lateral do Carrinho */}
+          <CartDrawer />
 
-        {/* Rodapé Institucional */}
-        <Footer />
+          {/* Botão Flutuante de WhatsApp */}
+          <FloatingWhatsapp />
+
+          {/* Rodapé Institucional */}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
