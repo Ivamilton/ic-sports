@@ -237,7 +237,14 @@ export async function getProdutos(): Promise<Produto[]> {
       // Adiciona cache-buster timestamp para nunca pegar dados em cache do Google ou do Next
       const separador = lojaConfig.planilhaCsvUrl.includes("?") ? "&" : "?";
       const urlComCacheBuster = `${lojaConfig.planilhaCsvUrl}${separador}_cb=${Date.now()}`;
-      const res = await fetch(urlComCacheBuster, { cache: "no-store" });
+      const res = await fetch(urlComCacheBuster, {
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          "Pragma": "no-cache",
+        },
+        next: { revalidate: 0 },
+      });
       if (res.ok) {
         const csv = await res.text();
         const parsed = Papa.parse<any>(csv, {
