@@ -1,8 +1,8 @@
-import { ShieldCheck, Truck, MessageCircle, CreditCard, Sparkles, Shirt } from "lucide-react";
+import { ShieldCheck, Truck, MessageCircleMore, CreditCard, Sparkles, Shirt } from "lucide-react";
 
 const itensTicker = [
   { texto: "COMPRA 100% SEGURA", icone: ShieldCheck },
-  { texto: "ATENDIMENTO DIRETO NO WHATSAPP", icone: MessageCircle },
+  { texto: "ATENDIMENTO DIRETO NO WHATSAPP", icone: MessageCircleMore },
   { texto: "ENTREGA NA CIDADE E REGIÕES PRÓXIMAS", icone: Truck },
   { texto: "QUALIDADE PADRÃO OFICIAL", icone: Sparkles },
   { texto: "PARCELAMENTO EM ATÉ 12X", icone: CreditCard },

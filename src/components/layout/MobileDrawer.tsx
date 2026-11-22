@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { X, MessageCircle, ChevronRight, Zap } from "lucide-react";
+import { X, MessageCircleMore, ChevronRight, PackageCheck } from "lucide-react";
 import { gerarLinkWhatsAppGeral } from "@/lib/whatsapp";
 import { lojaConfig } from "@/config/loja";
 
@@ -77,7 +77,7 @@ export function MobileDrawer({ aberto, onFechar }: MobileDrawerProps) {
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  {link.destaque && <Zap size={15} className="text-white" aria-hidden="true" />}
+                  {link.destaque && <PackageCheck size={15} className="text-white" aria-hidden="true" />}
                   <span>{link.nome}</span>
                 </div>
                 <ChevronRight size={16} className={link.destaque ? "text-white/60" : "text-[#999999]"} aria-hidden="true" />
@@ -131,7 +131,7 @@ export function MobileDrawer({ aberto, onFechar }: MobileDrawerProps) {
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center gap-2 bg-[#0A0A0A] hover:bg-[#262626] text-white font-black py-3 rounded-xl shadow-md transition-all text-sm uppercase tracking-wide cursor-pointer"
           >
-            <MessageCircle size={18} className="text-[#25D366]" aria-hidden="true" />
+            <MessageCircleMore size={18} className="text-[#25D366]" aria-hidden="true" />
             <span>Falar no WhatsApp</span>
           </a>
           <p className="text-center text-[11px] font-semibold text-[#737373]">

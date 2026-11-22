@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Zap, History, Shirt, Trophy, Baby, ArrowUpRight } from "lucide-react";
+import { PackageCheck, Gauge, UsersRound, RotateCcw, Baby, ArrowUpRight } from "lucide-react";
 
 const categorias = [
   {
@@ -7,7 +7,7 @@ const categorias = [
     sub: "Envio Imediato",
     tag: "ESTOQUE LOCAL",
     href: "/pronta-entrega",
-    icone: Zap,
+    icone: PackageCheck,
     corFundo: "bg-[#0A0A0A] text-white border-black",
     destaque: true,
   },
@@ -16,7 +16,7 @@ const categorias = [
     sub: "Padrão de Campo",
     tag: "ALTA PERFORMANCE",
     href: "/camisas?categoria=jogador",
-    icone: Trophy,
+    icone: Gauge,
     corFundo: "bg-white text-[#0A0A0A] border-[#E5E5E5]",
     destaque: false,
   },
@@ -25,7 +25,7 @@ const categorias = [
     sub: "Conforto & Dia a Dia",
     tag: "CLÁSSICO",
     href: "/camisas?categoria=torcedor",
-    icone: Shirt,
+    icone: UsersRound,
     corFundo: "bg-white text-[#0A0A0A] border-[#E5E5E5]",
     destaque: false,
   },
@@ -34,7 +34,7 @@ const categorias = [
     sub: "Épocas Históricas",
     tag: "RARIDADES",
     href: "/camisas?categoria=retro",
-    icone: History,
+    icone: RotateCcw,
     corFundo: "bg-[#F5F5F5] text-[#0A0A0A] border-[#E5E5E5]",
     destaque: false,
   },

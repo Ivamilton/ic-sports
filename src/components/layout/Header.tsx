@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu, Search, MessageCircle, Zap, ShoppingBag } from "lucide-react";
+import { Menu, Search, MessageCircleMore, PackageCheck, ShoppingBag } from "lucide-react";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { gerarLinkWhatsAppGeral } from "@/lib/whatsapp";
 import { useCart } from "@/context/CartContext";
@@ -190,7 +190,7 @@ export function Header() {
               href="/pronta-entrega"
               className="hidden sm:inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-[#0A0A0A] hover:bg-[#262626] text-white font-black text-xs uppercase tracking-wider whitespace-nowrap transition-all shadow-xs shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
             >
-              <Zap size={15} className="text-white shrink-0" aria-hidden="true" />
+              <PackageCheck size={15} className="text-white shrink-0" aria-hidden="true" />
               <span className="whitespace-nowrap">Pronta Entrega</span>
             </Link>
 
@@ -201,7 +201,7 @@ export function Header() {
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-[#0A0A0A] hover:bg-[#262626] text-white font-black text-xs uppercase tracking-wider whitespace-nowrap transition-all shadow-xs shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
             >
-              <MessageCircle size={16} className="text-[#25D366] shrink-0" aria-hidden="true" />
+              <MessageCircleMore size={16} className="text-[#25D366] shrink-0" aria-hidden="true" />
               <span className="whitespace-nowrap">Pedir no WhatsApp</span>
             </a>
 
@@ -229,7 +229,7 @@ export function Header() {
               aria-label="Ver produtos a Pronta Entrega"
               className="sm:hidden h-10 w-10 flex items-center justify-center rounded-xl bg-[#0A0A0A] text-white shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
             >
-              <Zap size={18} className="text-white" aria-hidden="true" />
+              <PackageCheck size={18} className="text-white" aria-hidden="true" />
             </Link>
 
             <a
@@ -239,7 +239,7 @@ export function Header() {
               aria-label="Falar com a IF Legacy no WhatsApp"
               className="sm:hidden h-10 w-10 flex items-center justify-center rounded-xl bg-[#0A0A0A] text-white shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
             >
-              <MessageCircle size={19} className="text-[#25D366]" aria-hidden="true" />
+              <MessageCircleMore size={19} className="text-[#25D366]" aria-hidden="true" />
             </a>
           </div>
         </div>
