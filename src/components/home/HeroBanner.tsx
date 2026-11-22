@@ -56,20 +56,12 @@ export function HeroBanner() {
           </div>
 
           {/* Destaques Rápidos */}
-          <div className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto text-left">
+          <div className="pt-8 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto text-left">
             <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-3">
               <Truck size={22} className="text-white shrink-0" aria-hidden="true" />
               <div>
                 <p className="text-xs font-bold text-white uppercase">Entrega Local</p>
                 <p className="text-[11px] text-[#A3A3A3]">Na cidade e cidades próximas</p>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-3">
-              <MessageCircle size={22} className="text-[#25D366] shrink-0" aria-hidden="true" />
-              <div>
-                <p className="text-xs font-bold text-white uppercase">Atendimento VIP</p>
-                <p className="text-[11px] text-[#A3A3A3]">Direto com {lojaConfig.responsavel}</p>
               </div>
             </div>
 
