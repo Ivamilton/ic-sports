@@ -1,8 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useMemo } from "react";
-import { Produto } from "@/lib/getProducts";
+import type { Produto } from "@/lib/getProducts";
 import { gerarLinkWhatsAppCarrinho, ItemPedidoCarrinho } from "@/lib/whatsapp";
+import { obterProdutosCacheados } from "@/lib/produtosClient";
 
 export interface ItemCarrinho {
   id: string; // produtoId-tamanho
@@ -73,8 +74,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!hidratado) return;
 
-    fetch("/api/produtos", { cache: "no-store" })
-      .then((resposta) => resposta.ok ? resposta.json() : [])
+    obterProdutosCacheados()
       .then((produtos: Produto[]) => {
         setItens((atuais) =>
           atuais

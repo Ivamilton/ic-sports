@@ -1,4 +1,6 @@
 import Papa from "papaparse";
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { lojaConfig } from "@/config/loja";
 import localProductsRaw from "@/data/products.json";
 
@@ -230,20 +232,13 @@ function mapearProdutoRaw(p: any, index: number = 0): Produto {
   };
 }
 
-export async function getProdutos(): Promise<Produto[]> {
+async function carregarProdutosDaFonte(): Promise<Produto[]> {
   // Se houver URL da planilha configurada, tenta buscar o CSV
   if (lojaConfig.planilhaCsvUrl && lojaConfig.planilhaCsvUrl.trim() !== "") {
     try {
-      // Adiciona cache-buster timestamp para nunca pegar dados em cache do Google ou do Next
-      const separador = lojaConfig.planilhaCsvUrl.includes("?") ? "&" : "?";
-      const urlComCacheBuster = `${lojaConfig.planilhaCsvUrl}${separador}_cb=${Date.now()}`;
-      const res = await fetch(urlComCacheBuster, {
-        cache: "no-store",
-        headers: {
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          "Pragma": "no-cache",
-        },
-        next: { revalidate: 0 },
+      const res = await fetch(lojaConfig.planilhaCsvUrl, {
+        cache: "force-cache",
+        next: { revalidate: 300 },
       });
       if (res.ok) {
         const csv = await res.text();
@@ -270,10 +265,16 @@ export async function getProdutos(): Promise<Produto[]> {
     .filter((p) => p.ativo);
 }
 
-export async function getProdutoPorSlug(slug: string): Promise<Produto | null> {
+export const getProdutos = unstable_cache(
+  carregarProdutosDaFonte,
+  ["ic-sports-produtos-v1"],
+  { revalidate: 300 }
+);
+
+export const getProdutoPorSlug = cache(async (slug: string): Promise<Produto | null> => {
   const produtos = await getProdutos();
   return produtos.find((p) => p.slug === slug || normalizarSlug(p.nome) === slug) || null;
-}
+});
 
 export async function getProdutosPorTime(time: string): Promise<Produto[]> {
   const produtos = await getProdutos();

@@ -9,7 +9,6 @@ import { MessageCircle } from "lucide-react";
 import { gerarLinkWhatsAppGeral } from "@/lib/whatsapp";
 import { lojaConfig } from "@/config/loja";
 
-export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const produtos = await getProdutos();

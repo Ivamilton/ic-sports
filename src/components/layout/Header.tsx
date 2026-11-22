@@ -7,7 +7,8 @@ import { Menu, Search, MessageCircle, Zap, ShoppingBag } from "lucide-react";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { gerarLinkWhatsAppGeral } from "@/lib/whatsapp";
 import { useCart } from "@/context/CartContext";
-import { Produto } from "@/lib/getProducts";
+import type { Produto } from "@/lib/getProducts";
+import { obterProdutosCacheados } from "@/lib/produtosClient";
 
 function normalizarTexto(texto: string) {
   return texto
@@ -48,9 +49,8 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/produtos", { cache: "no-store" })
-      .then((resposta) => resposta.ok ? resposta.json() : [])
-      .then((dados: Produto[]) => setProdutos(dados))
+    obterProdutosCacheados()
+      .then((dados) => setProdutos(dados))
       .catch(() => setProdutos([]));
   }, []);
 

@@ -3,8 +3,6 @@ import { getProdutos } from "@/lib/getProducts";
 import { CatalogoView } from "@/components/catalogo/CatalogoView";
 import { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Catálogo Completo de Camisas de Futebol — IF Legacy",
   description: "Navegue por todas as camisas nacionais, internacionais, retrô e infantis disponíveis na IF Legacy.",
