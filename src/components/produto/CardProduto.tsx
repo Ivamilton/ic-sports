@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, X } from "lucide-react";
@@ -17,12 +17,18 @@ const formatarBRL = (valor: number) =>
 
 export function CardProduto({ produto, prioridade = false }: CardProdutoProps) {
   const { adicionarAoCarrinho } = useCart();
+  const imagemPrincipal = produto.imagens[0] || "/placeholder-shirt.svg";
   const [escolhendoTamanho, setEscolhendoTamanho] = useState(false);
   const [imagemCarregada, setImagemCarregada] = useState(false);
+  const [imagemExibida, setImagemExibida] = useState(imagemPrincipal);
+
+  useEffect(() => {
+    setImagemExibida(imagemPrincipal);
+    setImagemCarregada(false);
+  }, [imagemPrincipal]);
 
   const isEsgotado = produto.totalEstoque <= 0;
   const precoAtual = produto.preco_promocional || produto.preco;
-  const imagemPrincipal = produto.imagens[0] || "/placeholders/real-madrid-1.svg";
 
   function handleSelecionarTamanho(tamanho: string) {
     adicionarAoCarrinho(produto, tamanho);
@@ -42,13 +48,17 @@ export function CardProduto({ produto, prioridade = false }: CardProdutoProps) {
             <div className="skeleton absolute inset-2 rounded-xl" aria-hidden="true" />
           )}
           <Image
-            src={imagemPrincipal}
+            src={imagemExibida}
             alt={produto.nome}
             fill
             loading={prioridade ? "eager" : "lazy"}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={prioridade}
             onLoad={() => setImagemCarregada(true)}
+            onError={() => {
+              setImagemExibida("/placeholder-shirt.svg");
+              setImagemCarregada(true);
+            }}
             className={`object-contain p-2 transition-all duration-300 ease-out group-hover:scale-[1.04] ${
               imagemCarregada ? "opacity-100" : "opacity-0"
             }`}

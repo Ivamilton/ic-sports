@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-label="Imagem da camisa indisponível">
+  <rect width="360" height="360" rx="24" fill="#F5F5F5"/>
+  <path d="M126 78l54 24 54-24 52 38-36 46-24-18v138H134V144l-24 18-36-46z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M180 102v180" stroke="#E5E5E5" stroke-width="6"/>
+  <circle cx="180" cy="178" r="26" fill="#E5E5E5"/>
+</svg>

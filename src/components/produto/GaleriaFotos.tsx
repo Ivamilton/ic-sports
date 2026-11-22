@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 interface GaleriaFotosProps {
@@ -11,8 +11,15 @@ interface GaleriaFotosProps {
 export function GaleriaFotos({ imagens, nome }: GaleriaFotosProps) {
   const [imagemAtiva, setImagemAtiva] = useState(0);
   const [imagemCarregada, setImagemCarregada] = useState(false);
+  const [imagemExibida, setImagemExibida] = useState("");
 
-  const fotos = imagens.length > 0 ? imagens : ["/placeholders/real-madrid-1.svg"];
+  const fotos = imagens.length > 0 ? imagens : ["/placeholder-shirt.svg"];
+  const imagemAtual = fotos[imagemAtiva] || fotos[0];
+
+  useEffect(() => {
+    setImagemExibida(imagemAtual);
+    setImagemCarregada(false);
+  }, [imagemAtual]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -22,13 +29,17 @@ export function GaleriaFotos({ imagens, nome }: GaleriaFotosProps) {
           <div className="skeleton absolute inset-4 rounded-xl" aria-hidden="true" />
         )}
         <Image
-          src={fotos[imagemAtiva] || fotos[0]}
+          src={imagemExibida || imagemAtual}
           alt={`${nome} - Foto ${imagemAtiva + 1}`}
           fill
           priority
           sizes="(max-width: 768px) 100vw, 50vw"
           loading="eager"
           onLoad={() => setImagemCarregada(true)}
+          onError={() => {
+            setImagemExibida("/placeholder-shirt.svg");
+            setImagemCarregada(true);
+          }}
           className={`object-contain p-4 transition-all duration-300 ${
             imagemCarregada ? "opacity-100" : "opacity-0"
           }`}

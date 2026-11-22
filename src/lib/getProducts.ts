@@ -4,6 +4,8 @@ import { unstable_cache } from "next/cache";
 import { lojaConfig } from "@/config/loja";
 import localProductsRaw from "@/data/products.json";
 
+let ultimoCatalogoValido: Produto[] | null = null;
+
 export interface Produto {
   id: string;
   slug: string;
@@ -224,7 +226,7 @@ function mapearProdutoRaw(p: any, index: number = 0): Produto {
     tamanhos_disponiveis: tamanhos,
     quantidade_em_estoque_por_tamanho: mapaEstoque,
     totalEstoque,
-    imagens: imagensArr.length > 0 ? imagensArr : ["/placeholders/real-madrid-1.svg"],
+    imagens: imagensArr.length > 0 ? imagensArr : ["/placeholder-shirt.svg"],
     destaque,
     ativo,
     tipoOrigem,
@@ -251,12 +253,17 @@ async function carregarProdutosDaFonte(): Promise<Produto[]> {
           const produtos = parsed.data
             .map(mapearProdutoRaw)
             .filter((p) => p.ativo);
+          ultimoCatalogoValido = produtos;
           return produtos;
         }
       }
     } catch (e) {
       console.warn("Falha ao ler planilha online, usando dados locais:", e);
     }
+  }
+
+  if (ultimoCatalogoValido) {
+    return ultimoCatalogoValido;
   }
 
   // Fallback para products.json local

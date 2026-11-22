@@ -107,7 +107,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const precoUnitario = produto.preco_promocional || produto.preco;
     const tamanhoNormalizado = tamanho.toUpperCase();
     const itemKey = `${produto.id}-${tamanhoNormalizado}`;
-    const imagem = produto.imagens[0] || "/placeholders/real-madrid-1.svg";
+    const imagem = produto.imagens[0] || "/placeholder-shirt.svg";
     const estoqueMaximo = Math.max(
       0,
       produto.quantidade_em_estoque_por_tamanho[tamanhoNormalizado] || 0
